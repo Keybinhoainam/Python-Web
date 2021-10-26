@@ -23,10 +23,12 @@ def store(request, category_slug=None):
     paginator = Paginator(products, 3)
     paged_products = paginator.get_page(page)
     product_count = products.count()
+    categories = Category.objects.all().filter()
 
     context = {
         'products': paged_products,
         'product_count': product_count,
+        'categories': categories,
     }
     return render(request, 'store/store.html', context=context)
 
