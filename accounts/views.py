@@ -89,7 +89,8 @@ def login(request):
                     next_page = params["next"]
                     return redirect(next_page)
             except Exception:
-                return redirect('dashboard')
+                # return redirect('dashboard')
+                return redirect('home')
         else:
             messages.error(request=request, message="Login failed!")
     context = {

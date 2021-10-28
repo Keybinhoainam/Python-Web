@@ -123,7 +123,7 @@
 			<main class="col-md-9">
 				<header class="border-bottom mb-4 pb-3">
 					<div class="form-inline">
-						<span class="mr-md-auto">Found <b>{{ product_count }}</b> Items
+						<span class="mr-md-auto">Found <b>{{ product_count }}</b> Items Of <b>{{category1}}</b>
 						</span>
 					</div>
 				</header>
@@ -154,11 +154,11 @@
 					<ul class="pagination">
 						{% if products.has_previous %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page=1">First</a>
+							<a class="page-link" href="{% url 'products_by_category' category1 %}?page=1">First</a>
 						</li>
 						<li class="page-item">
 							<a class="page-link"
-								href="{% url 'store' %}?page={{products.previous_page_number}}">Previous</a>
+								href="{% url 'products_by_category' category1 %}?page={{products.previous_page_number}}">Previous</a>
 						</li>
 						{% else %}
 						<li class="page-item disabled">
@@ -170,34 +170,34 @@
 						{% endif %}
 						{% if products.number|add:'-2' >= 1 %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page={{ products.number|add:'-2' }}">&hellip;</a>
+							<a class="page-link" href="{% url 'products_by_category' category1 %}?page={{ products.number|add:'-2' }}">&hellip;</a>
 						</li>
 						{% endif %}
 						{% for page in products.paginator.page_range %}
 						{% if products.number|add:'-1' <= page and page <= products.number|add:'1' %}
 						{% if page == products.number %}
 						<li class="page-item active">
-							<a class="page-link" href="{% url 'store' %}?page={{ page }}">{{ page }}</a>
+							<a class="page-link" href="{% url 'products_by_category' category1 %}?page={{ page }}">{{ page }}</a>
 						</li>
 						{% else %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page={{ page }}">{{ page }}</a>
+							<a class="page-link" href="{% url 'products_by_category' category1 %}?page={{ page }}">{{ page }}</a>
 						</li>
 						{% endif %}
 						{% endif %}
 						{% endfor %}
 						{% if products.number|add:'2' <= products.paginator.num_pages %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page={{ products.number|add:'2' }}">&hellip;</a>
+							<a class="page-link" href="{% url 'products_by_category' category1 %}?page={{ products.number|add:'2' }}">&hellip;</a>
 						</li>
 						{% endif %}
 						{% if products.has_next %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page={{products.next_page_number}}">Next</a>
+							<a class="page-link" href="{% url 'products_by_category' category1 %}?page={{products.next_page_number}}">Next</a>
 						</li>
 						<li class="page-item">
 							<a class="page-link"
-								href="{% url 'store' %}?page={{ products.paginator.num_pages }}">Last</a>
+								href="{% url 'products_by_category' category1 %}?page={{ products.paginator.num_pages }}">Last</a>
 						</li>
 						{% else %}
 						<li class="page-item disabled">
