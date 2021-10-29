@@ -4,9 +4,11 @@ from carts.models import CartItem
 from .forms import OrderForm
 import datetime
 from .models import Order
+from category.models import Category
 from store.models import Product
 
 def place_order(request, total=0, quantity=0,):
+    categories = Category.objects.all().filter()
     current_user = request.user
 
     # If the cart count is less than or equal to 0, then redirect back to shop
@@ -60,6 +62,7 @@ def place_order(request, total=0, quantity=0,):
                 'total': total,
                 'tax': tax,
                 'grand_total': grand_total,
+                'categories': categories,
             }
             return render(request, 'orders/payments.html', context)
     else:

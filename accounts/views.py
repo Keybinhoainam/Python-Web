@@ -11,12 +11,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 
 from .forms import RegistrationForm
+from category.models import Category
 from accounts.models import Account
 from carts.views import _cart_id
 
 import requests
 
 def register(request):
+    categories = Category.objects.all().filter()
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -40,11 +42,13 @@ def register(request):
         form = RegistrationForm()
     context = {
         'form': form,
+        'categories': categories,
     }
     return render(request, 'accounts/register.html', context)
 
 
 def login(request):
+    categories = Category.objects.all().filter()
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -96,6 +100,7 @@ def login(request):
     context = {
         'email': email if 'email' in locals() else '',
         'password': password if 'password' in locals() else '',
+        'categories': categories,
     }
     return render(request, 'accounts/login.html', context=context)
 
@@ -107,6 +112,10 @@ def logout(request):
 
 @login_required(login_url="login")
 def dashboard(request):
-    return render(request, "accounts/dashboard.html")
+    categories = Category.objects.all().filter()
+    context = {
+        'categories': categories,
+    }
+    return render(request, "accounts/dashboard.html", context=context)
 
 

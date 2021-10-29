@@ -172,6 +172,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
 @login_required(login_url='login')
 def checkout(request, total=0, quantity=0, cart_items=None):
+    categories = Category.objects.all().filter()
     try:
         # cart = Cart.objects.get(cart_id=_cart_id(request=request))
         cart_items = CartItem.objects.filter(user=request.user, is_active=True)
@@ -188,5 +189,6 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'cart_items': cart_items,
         'tax': tax if "tax" in locals() else "",
         'grand_total': grand_total,
+        'categories': categories,
     }
     return render(request, 'store/checkout.html', context=context)
