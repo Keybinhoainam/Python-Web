@@ -108,20 +108,35 @@ def searchPrice(request):
         category = request.GET.get('category')
         min = request.GET.get('min')
         max = request.GET.get('max')
-        productPrice = Product.objects.order_by('-created_date').filter(
-            Q(product_name__icontains=category))
-        products = []
-        k = 0
-        for product in productPrice:
-            if(int(max) < 2000):
-                if(product.price >= int(min) and product.price <= int(max)):
-                    products.append(product)
-                    k += 1
-            else:
-                if (product.price >= int(min)):
-                    products.append(product)
-                    k += 1
-        product_count = k
+        if (str(category) == 'allProduct'):
+            productPrice = Product.objects.order_by('-created_date').filter()
+            products = []
+            k = 0
+            for product in productPrice:
+                if (int(max) < 2000):
+                    if (product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
+        else:
+            productPrice = Product.objects.order_by('-created_date').filter(
+                Q(product_name__icontains=category))
+            products = []
+            k = 0
+            for product in productPrice:
+                if(int(max) < 2000):
+                    if(product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
 
     context = {
         'products': products,
@@ -139,20 +154,35 @@ def searchPrice2(request):
         category = request.GET.get('category')
         min = request.GET.get('min')
         max = request.GET.get('max')
-        productPrice = Product.objects.order_by('-created_date').filter(
-            Q(product_name__icontains=category))
-        products = []
-        k = 0
-        for product in productPrice:
-            if (int(max) < 2000):
-                if (product.price >= int(min) and product.price <= int(max)):
-                    products.append(product)
-                    k += 1
-            else:
-                if (product.price >= int(min)):
-                    products.append(product)
-                    k += 1
-        product_count = k
+        if (str(category) == 'allProduct'):
+            productPrice = Product.objects.order_by('-created_date').filter()
+            products = []
+            k = 0
+            for product in productPrice:
+                if (int(max) < 2000):
+                    if (product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
+        else:
+            productPrice = Product.objects.order_by('-created_date').filter(
+                Q(product_name__icontains=category))
+            products = []
+            k = 0
+            for product in productPrice:
+                if (int(max) < 2000):
+                    if (product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
 
     context = {
         'products': products,

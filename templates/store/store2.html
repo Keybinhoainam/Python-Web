@@ -129,6 +129,7 @@
 								<div class="form-row">
 									<div class="form-group text-right col-md-12">
 										<select name="category" class="mr-2 form-control">
+											<option value="allProduct">All Product</option>
 											{% for category in categories %}
 											    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
 									        {% endfor %}
