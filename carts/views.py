@@ -2,7 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 
-from store.models import Product
+from store.models import Product, Category
 from carts.models import Cart, CartItem
 
 # Create your views here.
@@ -145,6 +145,7 @@ def remove_cart_item(request, product_id, cart_item_id):
 
 
 def cart(request, total=0, quantity=0, cart_items=None):
+    categories = Category.objects.all().filter()
     try:
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
@@ -165,6 +166,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'cart_items': cart_items,
         'tax': tax if "tax" in locals() else "",
         'grand_total': grand_total if "tax" in locals() else 0,
+        'categories': categories,
     }
     return render(request, 'store/cart.html', context=context)
 
