@@ -10,7 +10,8 @@ class Product(models.Model):
     description = models.TextField(max_length=10000, blank=True)
     price = models.IntegerField()
     images = models.ImageField(upload_to='photos/products')
-    stock = models.IntegerField()
+    stock = models.IntegerField(default=0)
+    # stock_sold=models.IntegerField() #so luong da ban
     is_available = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # Khi xóa category thì Product bị xóa
     created_date = models.DateTimeField(auto_now_add=True)
@@ -36,3 +37,7 @@ class ReviewRating(models.Model):
 
     def __str__(self):
         return self.subject
+
+# class stock_sold(models.Model):
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     user = models.ForeignKey(Account, on_delete=models.CASCADE)
