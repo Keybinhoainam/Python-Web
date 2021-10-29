@@ -50,6 +50,7 @@ def store2(request, category_slug):
     return render(request, 'store/store2.html', context=context)
 
 def product_detail(request, category_slug, product_slug=None):
+    categories = Category.objects.all().filter()
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
         cart = Cart.objects.get(cart_id=_cart_id(request=request))
@@ -80,7 +81,8 @@ def product_detail(request, category_slug, product_slug=None):
         'in_cart': in_cart if 'in_cart' in locals() else False,
         'orderproduct': orderproduct,
         'reviews': reviews,
-        'category': category_slug
+        'category': category_slug,
+        'categories': categories,
 
 # >>>>>>> 02ecb5785d21bfbf218acf1352e23481931c5668
     }
@@ -99,6 +101,99 @@ def search(request):
         'product_count': product_count
     }
     return render(request, 'store/store.html', context=context)
+
+def searchPrice(request):
+    if ('category' and 'min' and 'max') in request.GET:
+        categories = Category.objects.all().filter()
+        category = request.GET.get('category')
+        min = request.GET.get('min')
+        max = request.GET.get('max')
+        if (str(category) == 'allProduct'):
+            productPrice = Product.objects.order_by('-created_date').filter()
+            products = []
+            k = 0
+            for product in productPrice:
+                if (int(max) < 2000):
+                    if (product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
+        else:
+            productPrice = Product.objects.order_by('-created_date').filter(
+                Q(product_name__icontains=category))
+            products = []
+            k = 0
+            for product in productPrice:
+                if(int(max) < 2000):
+                    if(product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
+
+    context = {
+        'products': products,
+        'product_count': product_count,
+        'category': category,
+        'min': min,
+        'max': max,
+        'categories': categories,
+    }
+    return render(request, 'store/store.html', context=context)
+
+def searchPrice2(request):
+    if ('category' and 'min' and 'max') in request.GET:
+        categories = Category.objects.all().filter()
+        category = request.GET.get('category')
+        min = request.GET.get('min')
+        max = request.GET.get('max')
+        if (str(category) == 'allProduct'):
+            productPrice = Product.objects.order_by('-created_date').filter()
+            products = []
+            k = 0
+            for product in productPrice:
+                if (int(max) < 2000):
+                    if (product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
+        else:
+            productPrice = Product.objects.order_by('-created_date').filter(
+                Q(product_name__icontains=category))
+            products = []
+            k = 0
+            for product in productPrice:
+                if (int(max) < 2000):
+                    if (product.price >= int(min) and product.price <= int(max)):
+                        products.append(product)
+                        k += 1
+                else:
+                    if (product.price >= int(min)):
+                        products.append(product)
+                        k += 1
+            product_count = k
+
+    context = {
+        'products': products,
+        'product_count': product_count,
+        'category': category,
+        'min': min,
+        'max': max,
+        'categories': categories,
+    }
+    return render(request, 'store/store2.html', context=context)
+
 def submit_review(request, product_id):
     url = request.META.get('HTTP_REFERER')
     if request.method == "POST":

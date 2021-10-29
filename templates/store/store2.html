@@ -16,6 +16,7 @@
 		<div class="row">
 			<aside class="col-md-3">
 				<div class="card">
+					<!--
 					<article class="filter-group">
 						<header class="card-header">
 							<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
@@ -26,7 +27,7 @@
 						<div class="filter-content collapse show" id="collapse_1">
 							<div class="card-body">
 								<ul class="list-menu">
-									<!--<li><a href="{% url 'store' %}">All products</a></li>-->
+									<li><a href="{% url 'store' %}">All products</a></li>
 									{% for category in categories %}
 									<li>
 										<a href="{{ category.get_url }}">{{ category.category_name }}</a>
@@ -34,11 +35,11 @@
 									{% endfor %}
 								</ul>
 							</div>
-							<!-- card-body.// -->
+
 						</div>
 					</article>
-					<!-- filter-group  .// -->
-					<!--
+
+
 					<article class="filter-group">
 						<header class="card-header">
 							<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
@@ -115,6 +116,68 @@
 
 						</div>
 					</article>-->
+					<article class="filter-group">
+						<form action="{% url 'searchPrice2' %}" method="GET">
+						<header class="card-header">
+							<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+								<i class="icon-control fa fa-chevron-down"></i>
+								<h6 class="title">Categories</h6>
+							</a>
+						</header>
+						<div class="filter-content collapse show" id="collapse_2">
+							<div class="card-body">
+								<div class="form-row">
+									<div class="form-group text-right col-md-12">
+										<select name="category" class="mr-2 form-control">
+											<option value="allProduct">All Product</option>
+											{% for category in categories %}
+											    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+									        {% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<header class="card-header">
+							<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+								<i class="icon-control fa fa-chevron-down"></i>
+								<h6 class="title">Price range</h6>
+							</a>
+						</header>
+						<div class="filter-content collapse show" id="collapse_3">
+							<div class="card-body">
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label>Min</label>
+										<select name="min" class="mr-2 form-control">
+											<option value="0">$0</option>
+											<option value="50">$50</option>
+											<option value="100">$100</option>
+											<option value="150">$150</option>
+											<option value="200">$200</option>
+											<option value="500">$500</option>
+											<option value="1000">$1000</option>
+										</select>
+									</div>
+									<div class="form-group text-right col-md-6">
+										<label>Max</label>
+										<select name="max" class="mr-2 form-control">
+											<option value="50">$50</option>
+											<option value="100">$100</option>
+											<option value="150">$150</option>
+											<option value="200">$200</option>
+											<option value="500">$500</option>
+											<option value="1000">$1000</option>
+											<option value="2000">$2000+</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<button class="btn btn-block btn-primary">Apply</button>
+						</form>
+					</article>
 					<!-- filter-group .// -->
 				</div>
 				<!-- card.// -->
