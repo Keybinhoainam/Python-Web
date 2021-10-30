@@ -38,11 +38,15 @@
                                 <span><a href="{% url 'products_by_category' category %}"><b >{{single_product.category}}</b></a></span>
                             </div>
                             <div>
-                                <span >Số sản phẩm còn lại:</span>
+                                <span >Số sản phẩm đã bán:</span>
+                                &ensp;
+                                <span><b >{{single_product.stock_sold}}</b></span>
+                            </div>
+                            <div>
+                                <span >Số sản phẩm còn lại: </span>
                                 &ensp;
                                 <span><b >{{single_product.stock}}</b></span>
                             </div>
-
 
                             <br>
                             <div id="content" style="display: none;">

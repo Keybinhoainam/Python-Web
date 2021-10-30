@@ -62,13 +62,6 @@ def product_detail(request, category_slug, product_slug=None):
         cart = Cart.objects.create(
             cart_id=_cart_id(request)
         )
-# <<<<<<< HEAD
-#     context = {
-#         'single_product': single_product,
-#         'in_cart': in_cart if 'in_cart' in locals() else False,
-#         'category':category_slug
-# =======
-
     try:
         orderproduct = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
     except Exception:
@@ -83,8 +76,6 @@ def product_detail(request, category_slug, product_slug=None):
         'reviews': reviews,
         'category': category_slug,
         'categories': categories,
-
-# >>>>>>> 02ecb5785d21bfbf218acf1352e23481931c5668
     }
     return render(request, 'store/product_detail.html', context=context)
 
