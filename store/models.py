@@ -10,7 +10,8 @@ class Product(models.Model):
     description = models.TextField(max_length=10000, blank=True)
     price = models.IntegerField()
     images = models.ImageField(upload_to='photos/products')
-    stock = models.IntegerField()
+    stock = models.IntegerField(default=100)
+    stock_sold = models.IntegerField(default=0)
     is_available = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # Khi xóa category thì Product bị xóa
     created_date = models.DateTimeField(auto_now_add=True)

@@ -4,9 +4,12 @@ from carts.models import CartItem
 from .forms import OrderForm
 import datetime
 from .models import Order
+from category.models import Category
 from store.models import Product
 
+
 def place_order(request, total=0, quantity=0,):
+    categories = Category.objects.all().filter()
     current_user = request.user
 
     # If the cart count is less than or equal to 0, then redirect back to shop
@@ -17,9 +20,23 @@ def place_order(request, total=0, quantity=0,):
 
     grand_total = 0
     tax = 0
+    # tong=0
     for cart_item in cart_items:
+        # số lượng sản phẩm giảm đi khi order
+        single_product = Product.objects.get(slug=cart_item.product.slug)
+        single_product.stock -= cart_item.quantity
+        single_product.stock_sold += cart_item.quantity
+        single_product.save()
+        #cộng vào số lượng đã bán
+        # stock_sold = stock_sold.objects.get(product=cart_item)
+        # stock_sold.stock_sold +=cart_item.quantity
+        # tong+=stock_sold.stock_sold
+        # stock_sold.save()
+
+        # tính tổng tiền
         total += (cart_item.product.price * cart_item.quantity)
         quantity += cart_item.quantity
+
     tax = (2 * total) / 100
     grand_total = total + tax
 
@@ -60,6 +77,8 @@ def place_order(request, total=0, quantity=0,):
                 'total': total,
                 'tax': tax,
                 'grand_total': grand_total,
+                'categories': categories,
+                # 'tongsldaban':tong,
             }
             return render(request, 'orders/payments.html', context)
     else:
