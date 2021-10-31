@@ -6,6 +6,7 @@ import datetime
 from .models import Order
 from category.models import Category
 from store.models import Product
+from orders.models import OrderProduct
 
 
 def place_order(request, total=0, quantity=0,):
@@ -71,6 +72,17 @@ def place_order(request, total=0, quantity=0,):
             data.save()
 
             order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
+
+            for cart_item in cart_items:
+                orderProduct = OrderProduct.objects.create(
+                    user=current_user,
+                    order=order,
+                    product=cart_item.product,
+                    quantity=cart_item.quantity,
+                    product_price=(cart_item.quantity * cart_item.product.price),
+                )
+                orderProduct.save()
+
             context = {
                 'order': order,
                 'cart_items': cart_items,

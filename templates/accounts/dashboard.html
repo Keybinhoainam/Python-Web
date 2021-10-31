@@ -21,7 +21,7 @@
 
                 <!--   SIDEBAR .//END   -->
             </aside>
-            <main class="col-md-9">
+            <main class="col-md-9"><!--
                 <article class="card">
                     <header class="card-header">
                         <strong class="d-inline-block mr-3">Order ID: 6123456789</strong>
@@ -48,8 +48,8 @@
                                     <span class="b">Total: $456 </span>
                                 </p>
                             </div>
-                        </div> <!-- row.// -->
-                    </div> <!-- card-body .// -->
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tr>
@@ -89,13 +89,103 @@
                                         class="btn btn-light"> Details </a> </td>
                             </tr>
                         </table>
-                    </div> <!-- table-responsive .end// -->
-                </article> <!-- order-group.// -->
+                    </div>
+                </article> -->
+
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Thông tin khách hàng</strong>
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p>Name: {{ user.first_name }} {{ user.last_name}}<br>
+                                    Phone: {{ user.phone_number }} <br>
+                                    Email: {{ user.email }}<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                {% for order1 in orders %}
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Order ID: {{ order1.order_number }}</strong>
+                        <span>Order Date: {{ order1.updated_at }}</span>
+                        <span class="fixed">
+                             <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo{{ order1.order_number }}">Details</button>
+                        </span>
+                    </header>
+
+                    <div id="demo{{ order1.order_number }}" class="collapse">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6 class="text-muted">Delivery to</h6>
+                                    <p>
+                                        Location1: {{ order1.address_line_1 }} <br>
+                                        Location2: {{ order1.address_line_2 }} <br>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="text-muted">Payment</h6>
+                                    <span class="text-success">
+                                        <i class="fab fa-lg fa-cc-visa"></i>
+                                        Direct money delivery
+                                    </span>
+                                    <p>Tax: ${{ order1.tax }} <br>
+                                        <span class="b">Total: ${{ order1.order_total }}</span>
+                                    </p>
+                                </div>
+                            </div> <!-- row.// -->
+                        </div> <!-- card-body .// -->
+
+                        <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th width="500">Product</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        {% for orderProduct in orderProducts %}
+                            {% if order1.order_number == orderProduct.order.order_number %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td width="65">
+                                            <img src="{{ orderProduct.product.images.url }}" class="img-xs border">
+                                        </td>
+                                        <td width="460">
+                                            <p class="title mb-0">{{ orderProduct.product.product_name }}</p>
+                                            <!--<var class="price text-muted">USD 145</var>-->
+                                        </td>
+                                        <!--<td> Seller <br> Nike clothing </td>
+                                        <td width="250"> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#"
+                                                class="btn btn-light"> Details </a> </td>-->
+                                        <td width="200">
+                                            <p>{{ orderProduct.quantity }}</p>
+                                        </td>
+
+                                        <td>
+                                            <p>${{ orderProduct.product_price }}</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </article>
+                {% endfor %}
+
             </main>
         </div> <!-- row.// -->
     </div>
-
-
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 {% endblock %}
