@@ -14,6 +14,7 @@ from .forms import RegistrationForm
 from category.models import Category
 from accounts.models import Account
 from carts.views import _cart_id
+from orders.models import Order, OrderProduct
 
 import requests
 
@@ -112,9 +113,22 @@ def logout(request):
 
 @login_required(login_url="login")
 def dashboard(request):
+    current_user = request.user
+    user = request.user
+    orders = Order.objects.filter(
+        user=current_user,
+    )
+    orderProducts = OrderProduct.objects.filter(
+        user=current_user,
+    )
+    print(len(orderProducts))
+    print(orderProducts)
     categories = Category.objects.all().filter()
     context = {
         'categories': categories,
+        'orders': orders,
+        'orderProducts': orderProducts,
+        'user': user,
     }
     return render(request, "accounts/dashboard.html", context=context)
 
