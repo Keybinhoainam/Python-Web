@@ -121,8 +121,6 @@ def dashboard(request):
     orderProducts = OrderProduct.objects.filter(
         user=current_user,
     )
-    print(len(orderProducts))
-    print(orderProducts)
     categories = Category.objects.all().filter()
     context = {
         'categories': categories,
