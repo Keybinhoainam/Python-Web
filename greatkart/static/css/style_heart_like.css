@@ -1,0 +1,87 @@
+/*********************************
+ẩn hiện
+*********************************/
+.product_item
+{
+	position: relative;
+	left: -10px;
+	width: calc(100% + 20px);
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	background: #FFFFFF;
+	cursor: pointer;
+	padding-top: 40px;
+	z-index: 0;
+}
+
+.product_fav
+{
+	position: absolute;
+	top: 33px;
+	right: 15px;
+	width: 36px;
+	height: 36px;
+	background: #FFFFFF;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+	border-radius: 50%;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+
+.product_item:hover .product_fav
+{
+	top: 18px;
+}
+
+
+.product_item:hover .product_fav
+{
+	visibility: visible;
+	opacity: 2;
+}
+
+/*********************************
+nút like
+*********************************/
+.liked-button {
+            display: none;
+            transition: 5s;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border: none;
+
+            width: 35px;
+            height: 35px;
+        }
+.alternating-image {
+            display: block;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border-radius: 50%;
+            /** Set the background image **/
+            background: url(../images/icons/heartlike_hover.png) no-repeat;
+            /** Scale the size of the image being used **/
+            background-size: contain;
+            /** Need to set the width of the container **/
+           width: 35px;
+            height: 35px;
+            /** Remove the default border for buttons **/
+            border: none;
+            padding:0;
+
+            }
+ .alternating-image:hover {
+            background: url(../images/icons/heartlike_liked.png) no-repeat;
+            background-size: contain;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            padding:0;
+        }
