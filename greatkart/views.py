@@ -10,3 +10,11 @@ def home(request):
         'categories': categories,
     }
     return render(request, 'home.html', context=context)
+def wishlist(request):
+    products = Product.objects.all().filter(is_available=True)
+    categories = Category.objects.all().filter()
+    context = {
+        'products': products,
+        'categories': categories,
+    }
+    return render(request, 'wishlist.html', context=context)

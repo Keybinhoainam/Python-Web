@@ -39,6 +39,7 @@
 .product_item:hover .product_fav
 {
 	top: 18px;
+
 }
 
 
@@ -52,12 +53,13 @@
 nút like
 *********************************/
 .liked-button {
+
             display: none;
             transition: 5s;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
             border: none;
-
+            right: 15px;
             width: 30px;
             height: 30px;
         }
@@ -66,19 +68,22 @@ nút like
             -moz-box-sizing: border-box;
             box-sizing: border-box;
             border-radius: 50%;
+
+            position: absolute;
+            right: 15px;
             /** Set the background image **/
             background: url(../images/icons/heartlike_hover.png) no-repeat;
             /** Scale the size of the image being used **/
             background-size: contain;
             /** Need to set the width of the container **/
-           width: 30px;
+            width: 30px;
             height: 30px;
             /** Remove the default border for buttons **/
             border: none;
             padding:0;
 
             }
- .alternating-image:hover {
+.alternating-image:hover {
             background: url(../images/icons/heartlike_liked.png) no-repeat;
             background-size: contain;
             border-radius: 50%;

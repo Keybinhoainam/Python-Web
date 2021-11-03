@@ -20,20 +20,15 @@
     <div class="container">
         <header class="section-heading">
             <a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
-            <h3 class="section-title">Popular products</h3>
+            <h3 class="section-title">WishList</h3>
         </header><!-- sect-heading -->
         <div class="row">
             {% for product in products %}
-                {% if product.stock_sold > 9 %}
+                {% if product.is_like %}
                     <div class="col-md-3">
                         <div class="card card-product-grid">
 
-<!--                                <div class="product_item discount d-flex flex-column align-items-center justify-content-center ">-->
-<!--&lt;!&ndash;                                    nút like&ndash;&gt;-->
-<!--                                    <div class="product_fav">-->
-<!--                                        href="{% url 'like' product.id %}"-->
-
-                                        {% if product.is_like == True %}
+                                {% if product.is_like == True %}
 
 <!--                                            <a  class="alternating-image" type="button" onclick="function" href="{% url 'like' product.id %}">-->
                                             <button class="alternating-image"  >
@@ -47,10 +42,7 @@
                                             </button>
 <!--                                            </a>-->
                                         {% endif %}
-
-<!--                                    </div>-->
-<!--                                </div>-->
-                                    <br><br>
+                                <br><br>
 <!--                                    nút like (end)-->
                                     <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
                                     <figcaption class="info-wrap">
