@@ -101,6 +101,18 @@
 
                             <!-- row.// -->
                             <hr />
+                            {% if single_product.is_like  %}
+
+                                <a  class="btn btn-primary" type="button" href="{% url 'like' single_product.id %}">
+                                        <span class="text">Remove Wishlist</span>
+                                        <i class="fas fa-heart-broken"></i>
+                                </a>
+                            {% else %}
+                                <a  class="btn btn-primary" type="button" href="{% url 'like' single_product.id %}">
+                                    <span class="text">Add to Wishlist</span>
+                                    <i class="fas fa-heartbeat"></i>
+                                </a>
+                            {% endif %}
                             {% if single_product.stock > 0 %} {% if in_cart %}
                             <button type="submit" class="btn btn-success">
                                 <span class="text">Add to cart</span>

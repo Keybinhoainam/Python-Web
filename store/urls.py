@@ -9,4 +9,6 @@ urlpatterns = [
     path('searchPrice/', views.searchPrice, name='searchPrice'),
     path('searchPrice2/', views.searchPrice2, name='searchPrice2'),
     path('submit_review/<int:product_id>/',views.submit_review, name='submit_review'),
+    path('like/<int:product_id>/',views.like, name='like'),
+
 ]
