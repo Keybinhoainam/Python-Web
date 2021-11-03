@@ -16,106 +16,6 @@
 		<div class="row">
 			<aside class="col-md-3">
 				<div class="card">
-					<!--
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Categories</h6>
-							</a>
-						</header>
-						<div class="filter-content collapse show" id="collapse_1">
-							<div class="card-body">
-								<ul class="list-menu">
-									<li><a href="{% url 'store' %}">All products</a></li>
-									{% for category in categories %}
-									<li>
-										<a href="{{ category.get_url }}">{{ category.category_name }}</a>
-									</li>
-									{% endfor %}
-								</ul>
-							</div>
-
-						</div>
-					</article>
-
-
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Sizes</h6>
-							</a>
-						</header>
-						<div class="filter-content collapse show" id="collapse_4">
-							<div class="card-body">
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> XS </span>
-								</label>
-
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> SM </span>
-								</label>
-
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> LG </span>
-								</label>
-
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> XXL </span>
-								</label>
-							</div>
-
-						</div>
-					</article>
-
-
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Price range</h6>
-							</a>
-						</header>
-						<div class="filter-content collapse show" id="collapse_3">
-							<div class="card-body">
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label>Min</label>
-										<input class="form-control" placeholder="$0" type="number">
-										<select class="mr-2 form-control">
-											<option value="0">$0</option>
-											<option value="50">$50</option>
-											<option value="100">$100</option>
-											<option value="150">$150</option>
-											<option value="200">$200</option>
-											<option value="500">$500</option>
-											<option value="1000">$1000</option>
-										</select>
-									</div>
-									<div class="form-group text-right col-md-6">
-										<label>Max</label>
-										<select class="mr-2 form-control">
-											<option value="50">$50</option>
-											<option value="100">$100</option>
-											<option value="150">$150</option>
-											<option value="200">$200</option>
-											<option value="500">$500</option>
-											<option value="1000">$1000</option>
-											<option value="2000">$2000+</option>
-										</select>
-									</div>
-								</div>
-
-								<button class="btn btn-block btn-primary">Apply</button>
-							</div>
-
-						</div>
-					</article>-->
 					<article class="filter-group">
 						<form action="{% url 'searchPrice2' %}" method="GET">
 						<header class="card-header">
@@ -197,6 +97,12 @@
 					<div class="col-md-4">
 						<figure class="card card-product-grid">
 							<div class="img-wrap">
+								{% if product.is_like == True %}
+								   <button class="alternating-image"  >
+									   <img class="liked-button"  src="{% static "images/icons/heartlike_liked.png" %}" width="20" height="20" " style="display: inline;">
+								   </button>
+									<br><br>
+								{% endif %}
 								<img src="{{ product.images.url }}" />
 							</div>
 							<figcaption class="info-wrap">
