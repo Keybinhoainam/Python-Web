@@ -98,7 +98,14 @@
 					{% for product in products %}
 					<div class="col-md-4">
 						<figure class="card card-product-grid">
+
 							<div class="img-wrap">
+								{% if product.is_like == True %}
+								   <button class="alternating-image"  >
+									   <img class="liked-button"  src="{% static "images/icons/heartlike_liked.png" %}" width="20" height="20" " style="display: inline;">
+								   </button>
+									<br><br>
+								{% endif %}
 								<img src="{{ product.images.url }}" />
 							</div>
 							<figcaption class="info-wrap">

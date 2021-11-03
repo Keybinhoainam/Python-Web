@@ -27,29 +27,13 @@
                 {% if product.stock_sold > 9 %}
                     <div class="col-md-3">
                         <div class="card card-product-grid">
-
-<!--                                <div class="product_item discount d-flex flex-column align-items-center justify-content-center ">-->
-<!--&lt;!&ndash;                                    nút like&ndash;&gt;-->
-<!--                                    <div class="product_fav">-->
-<!--                                        href="{% url 'like' product.id %}"-->
-
                                         {% if product.is_like == True %}
 
 <!--                                            <a  class="alternating-image" type="button" onclick="function" href="{% url 'like' product.id %}">-->
                                             <button class="alternating-image"  >
                                                 <img class="liked-button"  src="{% static "images/icons/heartlike_liked.png" %}" width="20" height="20" " style="display: inline;">
                                             </button>
-<!--                                            </a>-->
-                                        {% else %}
-<!--                                            <a  class="alternating-image" type="button" onclick="function" href="{% url 'like' product.id %}">-->
-                                            <button class="alternating-image"  >
-                                                <img class="liked-button"  src="{% static "images/icons/heartlike_liked.png" %}" width="20" height="20" " >
-                                            </button>
-<!--                                            </a>-->
                                         {% endif %}
-
-<!--                                    </div>-->
-<!--                                </div>-->
                                     <br><br>
 <!--                                    nút like (end)-->
                                     <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>

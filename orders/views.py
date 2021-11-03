@@ -92,6 +92,7 @@ def place_order(request, total=0, quantity=0,):
                 'categories': categories,
                 # 'tongsldaban':tong,
             }
+            cart_items.delete()
             return render(request, 'orders/payments.html', context)
     else:
         return redirect('checkout')
