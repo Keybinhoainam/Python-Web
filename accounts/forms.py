@@ -1,4 +1,7 @@
+import re
+
 from django import forms
+from django.contrib.auth.models import User
 from django.forms import CharField
 from django.forms import widgets
 from .models import Account
@@ -43,3 +46,9 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError(
                 'Password does not match!'
             )
+
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ['first_name', 'last_name', 'phone_number', 'email']
