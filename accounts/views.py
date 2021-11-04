@@ -1,4 +1,7 @@
 from re import split
+
+from django.http import HttpResponse
+
 from carts.models import Cart, CartItem
 from django.shortcuts import redirect, render
 from django.contrib import messages, auth
@@ -10,12 +13,13 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, EditForm
 from category.models import Category
 from accounts.models import Account
 from carts.views import _cart_id
 
 import requests
+
 
 def register(request):
     categories = Category.objects.all().filter()
@@ -104,11 +108,13 @@ def login(request):
     }
     return render(request, 'accounts/login.html', context=context)
 
+
 @login_required(login_url="login")
 def logout(request):
     auth.logout(request)
     messages.success(request=request, message="You are logged out!")
     return redirect('login')
+
 
 @login_required(login_url="login")
 def dashboard(request):
@@ -119,3 +125,13 @@ def dashboard(request):
     return render(request, "accounts/dashboard.html", context=context)
 
 
+def edit(request):
+    if request.method == 'POST':
+        form = EditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = EditForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'accounts/edit.html', args)
