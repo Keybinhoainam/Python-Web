@@ -1,0 +1,5 @@
+pip==21.3.1
+pipenv==2021.5.29
+Django==2.2
+environ==1.0
+virtualenv==20.8.1
